@@ -83,6 +83,21 @@
                 </div>
             </li>
 
+            <?php $hidden = can('view', PRIV_REPORTS) ? '' : 'd-none'; ?>
+            <?php $active = $active_menu == PRIV_REPORTS ? 'active' : ''; ?>
+            <li class="nav-item dropdown <?= $active . $hidden ?>">
+                <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown"
+                   data-tippy-content="<?= lang('reports_hint') ?>">
+                    <i class="fas fa-chart-simple me-2"></i>
+                    <?= lang('reports') ?>
+                </a>
+                <div class="dropdown-menu dropdown-menu-end">
+                    <a class="dropdown-item" href="<?= site_url('reports/sales') ?>">
+                        <?= lang('sales') ?>
+                    </a>
+                </div>
+            </li>
+
             <?php $hidden = can('view', PRIV_SYSTEM_SETTINGS) || can('view', PRIV_USER_SETTINGS) ? '' : 'd-none'; ?>
             <?php $active = $active_menu == PRIV_SYSTEM_SETTINGS ? 'active' : ''; ?>
             <li class="nav-item dropdown <?= $active . $hidden ?>">
