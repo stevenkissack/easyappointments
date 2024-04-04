@@ -1,5 +1,7 @@
 <?php defined('BASEPATH') or exit('No direct script access allowed');
 
+require_once __DIR__ . "/../../reports/ninety_day_sales.php";
+
 /* ----------------------------------------------------------------------------
  * Easy!Appointments - Online Appointment Scheduler
  *
@@ -58,67 +60,26 @@ class Sales extends EA_Controller
 
         $role_slug = session('role_slug');
 
-        $now = new DateTime();
-        $ninety_days_ago = $now->modify('-90 days');
-
         $services = $this->db
             ->select(
-                'name',
+                'id, name',
             )
             ->from('services')
             ->get()
             ->result_array();
 
-        $sales_history = $this->db
-            ->select('appointments.id, start_datetime, end_datetime, status, appointments.price, appointments.currency, id_services, services.name as service_name')
-            ->from('appointments')
-            ->join('services', 'appointments.id_services = services.id', 'left')
-            ->where('start_datetime >=', $ninety_days_ago->format('Y-m-d H:i:s'))
-            ->where('appointments.status', 'Booked')
-            ->get()
-            ->result_array();
-
-        $service_names = array_map(function($service) {
-                return $service['name'];
-            }, $services);
-
-        // echo $this->db->last_query();
-
-        // Aggregate sales data
-        $aggregated_data = [];
-        foreach ($sales_history as $record) {
-            $serviceDate = new DateTime($record['start_datetime']);
-            // First day of the month for the given service date
-            $firstDayOfMonth = new DateTime($serviceDate->format('Y-m-01'));
-            // Calculate the difference in weeks + 1 to adjust week numbering starting from 1
-            $weekOfMonth = intval($serviceDate->format('W')) - intval($firstDayOfMonth->format('W')) + 1;
-            
-            $monthName = $serviceDate->format('M');
-            $weekLabel = "{$monthName}, week {$weekOfMonth}";
-            
-            if (!isset($aggregated_data[$weekLabel])) {
-                $aggregated_data[$weekLabel] = array_fill_keys($service_names, 0);
-            }
-            
-            if (in_array($record['service_name'], $service_names)) {
-                $aggregated_data[$weekLabel][$record['service_name']]++;
-            }
+        $serviceMap = [];
+        foreach ($services as $service) {
+            $serviceMap[$service['id']] = $service['name'];
         }
+        // $service_names = array_map(function($service) {
+        //         return $service['name'];
+        //     }, $services);
 
-        // Corrected approach for initializing $chartData with header row
-        $chartData = [["Week"]];
-        foreach ($service_names as $name) {
-            $chartData[0][] = $name;
-        }
-
-        // Populate chart data with sales counts
-        foreach ($aggregated_data as $weekLabel => $services) {
-            $row = [$weekLabel]; // First element of each row is the week label
-            foreach ($service_names as $serviceName) {
-                $row[] = $services[$serviceName]; // Append sales count for each service
-            }
-            $chartData[] = $row;
-        }
+        $report = new NinetyDaySalesReport([
+            "service_map"=>$serviceMap
+        ]);
+        $report->run();
         
         script_vars([
             'user_id' => $user_id,
@@ -131,12 +92,13 @@ class Sales extends EA_Controller
             'user_display_name' => $this->accounts->get_user_display_name($user_id),
             'timezones' => $this->timezones->to_array(),
             'privileges' => $this->roles_model->get_permissions_by_slug($role_slug),
-            'sales_history' => $sales_history,
-            'chart_data' => $chartData,
-            'service_names' => $service_names
+            'report' => $report,
+            'service_map' => $serviceMap,
         ]);
 
-        $this->load->view('pages/sales_report');
+        $this->load->view('pages/sales_report', array(
+            'report' => $report
+        ));
     }
 
 }
