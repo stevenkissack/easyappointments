@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "444e1514c763dc9cccfba9449947173a",
+    "content-hash": "3ca00f950ad5baaaca18e26cd06b0afc",
     "packages": [
         {
             "name": "firebase/php-jwt",
@@ -675,54 +675,17 @@
             "time": "2023-01-17T22:16:11+00:00"
         },
         {
-            "name": "koolreport/codeigniter",
-            "version": "1.8.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/koolreport/codeigniter.git",
-                "reference": "d4ffd37c1792b3d11b701a54927ad11571569470"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/koolreport/codeigniter/zipball/d4ffd37c1792b3d11b701a54927ad11571569470",
-                "reference": "d4ffd37c1792b3d11b701a54927ad11571569470",
-                "shasum": ""
-            },
-            "type": "library",
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "description": "Allow to use KoolReport seamlessly in CodeIgniter",
-            "homepage": "https://www.koolreport.com",
-            "keywords": [
-                "CodeIgniter Report",
-                "Data Report",
-                "KooLReport CodeIgniter",
-                "Reporting Tools",
-                "codeIgniter reporting",
-                "codeIgniter reporting tool",
-                "laravel",
-                "php"
-            ],
-            "support": {
-                "issues": "https://github.com/koolreport/codeigniter/issues",
-                "source": "https://github.com/koolreport/codeigniter/tree/master"
-            },
-            "time": "2019-06-03T08:10:35+00:00"
-        },
-        {
             "name": "koolreport/core",
-            "version": "6.2.0",
+            "version": "6.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/koolreport/core.git",
-                "reference": "7cf23aabc30b1ab377178dbd2e74d2e92380022f"
+                "reference": "35eb87b40d527c71a49d85ced861cbf834b4724a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/koolreport/core/zipball/7cf23aabc30b1ab377178dbd2e74d2e92380022f",
-                "reference": "7cf23aabc30b1ab377178dbd2e74d2e92380022f",
+                "url": "https://api.github.com/repos/koolreport/core/zipball/35eb87b40d527c71a49d85ced861cbf834b4724a",
+                "reference": "35eb87b40d527c71a49d85ced861cbf834b4724a",
                 "shasum": ""
             },
             "require": {
@@ -755,9 +718,9 @@
             ],
             "support": {
                 "issues": "https://github.com/koolreport/core/issues",
-                "source": "https://github.com/koolreport/core/tree/v6.2.0"
+                "source": "https://github.com/koolreport/core/tree/v6.5.0"
             },
-            "time": "2023-09-11T09:53:18+00:00"
+            "time": "2024-03-27T07:56:52+00:00"
         },
         {
             "name": "monolog/monolog",
