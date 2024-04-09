@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "dc8ef071db7a352f4086e1aeec196244",
+    "content-hash": "3ca00f950ad5baaaca18e26cd06b0afc",
     "packages": [
         {
             "name": "firebase/php-jwt",
@@ -673,6 +673,54 @@
                 "source": "https://github.com/jasvrcek/ICS/tree/0.8.5"
             },
             "time": "2023-01-17T22:16:11+00:00"
+        },
+        {
+            "name": "koolreport/core",
+            "version": "6.5.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/koolreport/core.git",
+                "reference": "35eb87b40d527c71a49d85ced861cbf834b4724a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/koolreport/core/zipball/35eb87b40d527c71a49d85ced861cbf834b4724a",
+                "reference": "35eb87b40d527c71a49d85ced861cbf834b4724a",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "autoload.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "KoolPHP Inc",
+                    "homepage": "https://www.koolphp.net"
+                }
+            ],
+            "description": "An Open Source PHP Reporting Framework for easier and faster report delivery.",
+            "homepage": "https://www.koolreport.com",
+            "keywords": [
+                "PHP Reporting Framework",
+                "PHP Reporting Tools",
+                "charts and graphs",
+                "data processing",
+                "data visualization"
+            ],
+            "support": {
+                "issues": "https://github.com/koolreport/core/issues",
+                "source": "https://github.com/koolreport/core/tree/v6.5.0"
+            },
+            "time": "2024-03-27T07:56:52+00:00"
         },
         {
             "name": "monolog/monolog",
@@ -3794,5 +3842,5 @@
         "ext-fileinfo": "*"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.3.0"
+    "plugin-api-version": "2.6.0"
 }

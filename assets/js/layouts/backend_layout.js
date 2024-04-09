@@ -34,6 +34,7 @@ window.App.Layouts.Backend = (function () {
     const PRIV_CUSTOMERS = 'customers';
     const PRIV_SERVICES = 'services';
     const PRIV_USERS = 'users';
+    const PRIV_REPORTS = 'reports';
     const PRIV_SYSTEM_SETTINGS = 'system_settings';
     const PRIV_USER_SETTINGS = 'user_settings';
 
@@ -113,6 +114,7 @@ window.App.Layouts.Backend = (function () {
         PRIV_CUSTOMERS,
         PRIV_SERVICES,
         PRIV_USERS,
+        PRIV_REPORTS,
         PRIV_SYSTEM_SETTINGS,
         PRIV_USER_SETTINGS,
         displayNotification,

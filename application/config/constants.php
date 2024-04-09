@@ -68,6 +68,7 @@ const PRIV_APPOINTMENTS = 'appointments';
 const PRIV_CUSTOMERS = 'customers';
 const PRIV_SERVICES = 'services';
 const PRIV_USERS = 'users';
+const PRIV_REPORTS = 'reports';
 const PRIV_SYSTEM_SETTINGS = 'system_settings';
 const PRIV_USER_SETTINGS = 'user_settings';
 const PRIV_WEBHOOKS = 'webhooks';
