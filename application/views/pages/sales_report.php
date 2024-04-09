@@ -10,30 +10,68 @@ use koolreport\widgets\koolphp\Card;
 
     <div class="row mb-3">
         <div class="col-md-4 col-12">
-            <?php Card::create(array(
-                "title"=>"30 Day Revenue",
-                "value"=>11249,
-                "baseValue"=>9230,
-                "format"=>array(
-                    "value"=>array(
-                        "prefix"=>"THB "
-                    )
-                )
-            )); ?>  
+            <?php
+
+            $thirtyDaySalesArray = $report->dataStore('30_day_sales_stats')->toArray();
+            $prevThirtyDaySalesArray = $report->dataStore('prev_30_day_sales_stats')->toArray();
+
+            $thirtyDayStats = reset($thirtyDaySalesArray);
+            $prevThirtyDayStats = reset($prevThirtyDaySalesArray);
+
+            $thirtyDayRevenue = 0;
+            $thirtyDaySalesCount = 0;
+            $thirtyDayAveragePrice = 0;
+
+            $prevThirtyDayRevenue = 0;
+            $prevThirtyDaySalesCount = 0;
+            $prevThirtyDayAveragePrice = 0;
+
+            // Calculate values if the arrays contain data
+            if ($thirtyDayStats) {
+                $thirtyDayRevenue = $thirtyDayStats['price'];
+                $thirtyDaySalesCount = $thirtyDayStats['id'];
+                $thirtyDayAveragePrice = $thirtyDayStats['avg_price'];
+            }
+
+            if ($prevThirtyDayStats) {
+                $prevThirtyDayRevenue = $prevThirtyDayStats['price'];
+                $prevThirtyDaySalesCount = $prevThirtyDayStats['id'];
+                $prevThirtyDayAveragePrice = $prevThirtyDayStats['avg_price'];
+            }
+
+            Card::create([
+                'report' => $report,
+                'title' => '30 Day Revenue',
+                'value' => $thirtyDayRevenue,
+                'baseValue' => $prevThirtyDayRevenue,
+                'format' => [
+                    'value' => [
+                        'prefix' => 'THB ',
+                    ],
+                ],
+            ]);
+            ?>  
         </div>
         <div class="col-md-4 col-12">
-            <?php Card::create(array(
-                "title"=>"30 Day Sales",
-                "value"=>56,
-                "baseValue"=>43,
-            )); ?>  
+            <?php Card::create([
+                'report' => $report,
+                'title' => '30 Day Sales Count',
+                'value' => $thirtyDaySalesCount,
+                'baseValue' => $prevThirtyDaySalesCount,
+            ]); ?>  
         </div>
         <div class="col-md-4 col-12">
-            <?php Card::create(array(
-                "title"=>"Total Sales",
-                "value"=>343,
-                "baseValue"=>295,
-            )); ?>  
+            <?php Card::create([
+                'report' => $report,
+                'title' => '30 Day Average Price',
+                'value' => $thirtyDayAveragePrice,
+                'baseValue' => $prevThirtyDayAveragePrice,
+                'format' => [
+                    'value' => [
+                        'prefix' => 'THB ',
+                    ],
+                ],
+            ]); ?>  
         </div>
     </div>
 
@@ -43,24 +81,24 @@ use koolreport\widgets\koolphp\Card;
             <div class="card mb-4">
                 <div class="card-header">
                     <h5 class="fw-light text-black-50 mb-0">
-                        90 Days Weekly Sales
+                        90 Day Weekly Services Booked
                     </h5>
                 </div>
                 <div class="card-body">
-                    <?php 
-                    $columns = array(
-                        "week" => array(
-                            "label" => "Week",
-                            "type" => "string"
-                        )
-                    );
-                    
+                    <?php
+                    $columns = [
+                        'label' => [
+                            'label' => 'Week',
+                            'type' => 'string',
+                        ],
+                    ];
+
                     // Dynamically add columns for each service
                     foreach (vars('service_map') as $serviceId => $serviceName) {
-                        $columns[$serviceName] = array(
-                            "type" => "number",
-                            "label" => $serviceName
-                        );
+                        $columns[$serviceName] = [
+                            'type' => 'number',
+                            'label' => $serviceName,
+                        ];
                     }
 
                     BarChart::create([
@@ -71,7 +109,8 @@ use koolreport\widgets\koolphp\Card;
                             'hAxis' => ['title' => 'Sales Count', 'format' => '0'],
                             'vAxis' => ['title' => 'Period'],
                         ],
-                    ]); ?>
+                    ]);
+                    ?>
                 </div>
             </div>
         </div>
@@ -83,11 +122,12 @@ use koolreport\widgets\koolphp\Card;
             <div class="card mb-4">
                 <div class="card-header">
                     <h5 class="fw-light text-black-50 mb-0">
-                        Last 90 Days Sales
+                        Appointments In Last 90 Days
                     </h5>
                 </div>
                 <div class="card-body">
                 <?php Table::create([
+                    'report' => $report,
                     'dataSource' => $report->dataStore('ninety_days_sales'),
                     'columns' => [
                         'id' => [
@@ -95,7 +135,7 @@ use koolreport\widgets\koolphp\Card;
                         ],
                         'start_datetime' => [
                             'type' => 'date',
-                            'label' => 'Sale Date',
+                            'label' => 'Appointment Date',
                         ],
                         'price' => [
                             'formatValue' => function ($value, $row, $cKey) {
