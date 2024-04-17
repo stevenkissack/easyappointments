@@ -47,7 +47,7 @@
                     <div class="card h-100">
                         <div class="card-header">
                             <h5 class="fw-light text-black-50 mb-0">
-                                <?= lang('Customers') ?>
+                                <?= lang('customers') ?>
                             </h5>
                         </div>
                         <div class="card-body">
@@ -74,7 +74,7 @@
                     <div class="card h-100">
                         <div class="card-header">
                             <h5 class="fw-light text-black-50 mb-0">
-                                <?= lang('Database') ?>
+                                <?= lang('database') ?>
                             </h5>
                         </div>
                         <div class="card-body">
@@ -87,7 +87,7 @@
                         <div class="card-footer bg-white border-0">
                             <form method="POST" action="<?= site_url('exports/download_database') ?>">
                                 <input type="hidden" name="csrf_token" value="<?= vars('csrf_token') ?>">
-                                <button type="submit" class="btn btn-download disabled btn-outline-primary w-100">
+                                <button type="submit" class="btn btn-download btn-outline-primary w-100">
                                     <i class="fas fa-download me-2"></i>
                                     <?= lang('download') ?>
                                 </button>

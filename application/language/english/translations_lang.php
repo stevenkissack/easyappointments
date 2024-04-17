@@ -453,4 +453,8 @@ $lang['webhook_saved'] = 'Webhook saved successfully.';
 $lang['webhook_deleted'] = 'Webhook deleted successfully.';
 $lang['delete_webhook'] = 'Delete Webhook';
 $lang['contact_info'] = 'Contact Info';
+$lang['database'] = 'Database';
+$lang['export_appointments_info'] = 'Export the Appointment table as CSV.';
+$lang['export_customers_info'] = 'Export the Customer table as CSV.';
+$lang['export_database_info'] = 'Export the entire Database as SQL.';
 // End

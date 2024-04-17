@@ -109,4 +109,23 @@ class Exports extends EA_Controller
             json_exception($e);
         }
     }
+
+     /**
+     * Download Database.
+     */
+    public function download_database()
+    {
+        try {
+            if (cannot('view', PRIV_SYSTEM_SETTINGS)) {
+                throw new RuntimeException('You do not have the required permissions for this task.');
+            }
+
+            $backup = $this->dbutil->backup();
+            
+            force_download('database.gz', $backup);
+
+        } catch (Throwable $e) {
+            json_exception($e);
+        }
+    }
 }
